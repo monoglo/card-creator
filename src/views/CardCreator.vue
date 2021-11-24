@@ -1,7 +1,8 @@
 <template>
   <div class="ma-6">
     <v-row>
-      <v-col cols="3">
+      <v-col cols="12" xs="3" lg="3">
+        <!-- 卡牌预览 -->
         <v-card
           max-width="248"
           height="352"
@@ -13,24 +14,17 @@
           <v-card-title class="text-center"> {{ cardTitle }} </v-card-title>
           <v-img :src="imageSrc" height="180px"></v-img>
 
-          <v-card-subtitle style="margin: auto">
+          <v-card-subtitle style="height: 72px">
             {{ cardSubTitle }}
           </v-card-subtitle>
-          <div style="position: absolute; bottom: 0; width: 100%">
+          <div style="width: 100%">
             <v-divider></v-divider>
             <v-btn text class="font-weight-black"> {{ cardType }} </v-btn>
           </div>
         </v-card>
       </v-col>
-      <v-col cols="9" id="right"
-        ><v-form style="width: 400px">
-          <v-btn
-            class="font-weight-black"
-            @click="exportCanvas"
-            color="primary"
-          >
-            Export
-          </v-btn>
+      <v-col cols="11" xs="3" lg="3" id="right"
+        ><v-form>
           <v-slider
             hint="Im a hint"
             max="3"
@@ -51,17 +45,40 @@
             label="Card Subtitle"
           ></v-text-field>
           <v-text-field v-model="cardType" label="Card Type"></v-text-field>
-          <v-color-picker
-            v-model="cardBackgroundColor"
-            dot-size="25"
-            swatches-max-height="200"
-          ></v-color-picker>
+          <v-row>
+            <v-col cols="8">
+              <v-color-picker
+                v-model="cardBackgroundColor"
+                dot-size="25"
+                swatches-max-height="200"
+              ></v-color-picker>
+            </v-col>
+            <v-col cols="4">
+              <v-btn
+                class="font-weight-black"
+                @click="exportCanvas"
+                color="primary"
+                style="margin-top: 220px"
+                large
+              >
+                Export
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-form>
       </v-col>
+      <v-col
+        cols="12"
+        xs="6"
+        lg="6"
+        id="result"
+        style="zoom: 175%; display: flex; overflow-x: auto; white-space: nowrap"
+      >
+      </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12" id="result" style="zoom: 175%"> </v-col>
-    </v-row>
+    <v-divider></v-divider>
+    click "EXPORT" and then right click to save image <br />
+    点击 “EXPORT” 然后右键保存图片
   </div>
 </template>
 
@@ -86,7 +103,7 @@ export default {
         allowTaint: true,
         useCORS: true,
       }).then(function (canvas) {
-        document.getElementById("result").appendChild(canvas);
+        document.getElementById("result").prepend(canvas);
       });
     },
     uploadImage(files) {
@@ -96,4 +113,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+canvas {
+  margin-right: 2px;
+}
+</style>

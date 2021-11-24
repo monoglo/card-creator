@@ -1,10 +1,10 @@
 # card-creator
 
-Create your own DIY card and export it!
+Create your own DIY card with material design and export it!
 
 [Start](https://monoglo.github.io/)
 
-![Dragon Knight](doc/images/dragonknight.png)
+<img src="doc/images/dragonknight.png" width="300">
 
 ## Project setup
 
@@ -33,3 +33,6 @@ npm run lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### License
+MIT

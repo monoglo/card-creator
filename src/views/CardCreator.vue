@@ -1,7 +1,7 @@
 <template>
-  <div class="ma-6">
+  <div class="ma-4">
     <v-row>
-      <v-col cols="12" xs="4" lg="4">
+      <v-col cols="12" :xs="ratio == 1.25 ? 4 : 3" :lg="ratio == 1.25 ? 4 : 3">
         <!-- 卡牌预览 -->
         <v-card
           max-width="248"
@@ -61,6 +61,7 @@
           <v-row>
             <v-col cols="8">
               <v-color-picker
+                class="mb-1"
                 v-model="cardBackgroundColor"
                 dot-size="25"
                 swatches-max-height="200"
@@ -82,8 +83,8 @@
       </v-col>
       <v-col
         cols="12"
-        xs="5"
-        lg="5"
+        :xs="ratio == 1.25 ? 5 : 6"
+        :lg="ratio == 1.25 ? 5 : 6"
         id="result"
         style="zoom: 175%; display: flex; overflow-x: auto; white-space: nowrap"
       >
@@ -106,8 +107,12 @@ export default {
       cardSubTitle: this.$t("sample.detail"),
       cardType: this.$t("sample.type"),
       imageSrc: "/sunset-3988885_1280.jpg",
-      scale: 3,
+      scale: 10,
+      ratio: 1,
     };
+  },
+  mounted() {
+    this.ratio = window.devicePixelRatio;
   },
   methods: {
     exportCanvas() {
@@ -149,5 +154,8 @@ canvas {
 }
 #card {
   box-shadow: none;
+}
+#result {
+  padding: 0 0 0 12px;
 }
 </style>

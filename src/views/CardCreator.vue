@@ -11,7 +11,19 @@
           id="card"
         >
           <v-card-title class="text-center"> {{ cardTitle }} </v-card-title>
-          <v-img :src="imageSrc" height="180px"></v-img>
+          <div
+            style="
+              height: 180px;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+              overflow: hidden;
+            "
+          >
+            <img :src="imageSrc" style="width: 100; height: 100%" />
+          </div>
 
           <v-card-subtitle
             style="
@@ -107,7 +119,7 @@ export default {
       cardSubTitle: this.$t("sample.detail"),
       cardType: this.$t("sample.type"),
       imageSrc: "/sunset-3988885_1280.jpg",
-      scale: 10,
+      scale: 3,
       ratio: 1,
     };
   },

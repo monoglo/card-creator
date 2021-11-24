@@ -1,7 +1,7 @@
 <template>
   <div class="ma-6">
     <v-row>
-      <v-col cols="12" xs="3" lg="3">
+      <v-col cols="12" xs="4" lg="4">
         <!-- 卡牌预览 -->
         <v-card
           max-width="248"
@@ -82,8 +82,8 @@
       </v-col>
       <v-col
         cols="12"
-        xs="6"
-        lg="6"
+        xs="5"
+        lg="5"
         id="result"
         style="zoom: 175%; display: flex; overflow-x: auto; white-space: nowrap"
       >

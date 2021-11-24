@@ -130,15 +130,24 @@ export default {
 canvas {
   margin-right: 2px;
 }
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+  #card {
+    zoom: 175%;
+  }
+}
+@-moz-document url-prefix() {
+  #card {
+    -moz-transform: scale(1.75);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(1.75);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(1.75);
+    -webkit-transform-origin: 0 0;
+    transform: scale(1.75);
+    transform-origin: 0 0;
+  }
+}
 #card {
   box-shadow: none;
-  -moz-transform: scale(1.75);
-  -moz-transform-origin: 0 0;
-  -o-transform: scale(1.75);
-  -o-transform-origin: 0 0;
-  -webkit-transform: scale(1.75);
-  -webkit-transform-origin: 0 0;
-  transform: scale(1.75);
-  transform-origin: 0 0;
 }
 </style>

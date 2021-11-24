@@ -8,13 +8,20 @@
           height="352"
           class="text-center"
           :color="cardBackgroundColor"
-          style="box-shadow: none; zoom: 175%"
           id="card"
         >
           <v-card-title class="text-center"> {{ cardTitle }} </v-card-title>
           <v-img :src="imageSrc" height="180px"></v-img>
 
-          <v-card-subtitle style="height: 72px">
+          <v-card-subtitle
+            style="
+              height: 72px;
+              padding: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+          >
             {{ cardSubTitle }}
           </v-card-subtitle>
           <div style="width: 100%">
@@ -30,21 +37,27 @@
             max="3"
             min="1"
             v-model="scale"
-            label="导出分辨率"
-            :tick-labels="['低', '中', '高']"
+            :label="$t('form.exportScale')"
+            :tick-labels="[$t('form.low'), $t('form.medium'), $t('form.high')]"
           ></v-slider>
-          <v-text-field v-model="cardTitle" label="Card Title"></v-text-field>
+          <v-text-field
+            v-model="cardTitle"
+            :label="$t('form.cardTitle')"
+          ></v-text-field>
           <v-file-input
             truncate-length="15"
             accept="image/*"
-            label="Input Image File"
+            :label="$t('form.uploadImageFile')"
             @change="uploadImage"
           ></v-file-input>
           <v-text-field
             v-model="cardSubTitle"
-            label="Card Subtitle"
+            :label="$t('form.cardSubtitle')"
           ></v-text-field>
-          <v-text-field v-model="cardType" label="Card Type"></v-text-field>
+          <v-text-field
+            v-model="cardType"
+            :label="$t('form.cardType')"
+          ></v-text-field>
           <v-row>
             <v-col cols="8">
               <v-color-picker
@@ -61,7 +74,7 @@
                 style="margin-top: 220px"
                 large
               >
-                Export
+                {{ $t("form.export") }}
               </v-btn>
             </v-col>
           </v-row>
@@ -78,7 +91,7 @@
     </v-row>
     <v-divider></v-divider>
     click "EXPORT" and then right click to save image <br />
-    点击 “EXPORT” 然后右键保存图片
+    点击 “生成” 然后右键保存图片
   </div>
 </template>
 
@@ -89,10 +102,10 @@ export default {
   data() {
     return {
       cardBackgroundColor: "#FFB74D",
-      cardTitle: "龙骑士",
-      cardSubTitle: "对抗龙系单位或与龙系单位协同作战时造成双倍伤害",
-      cardType: "职业",
-      imageSrc: "/sunshine.jpg",
+      cardTitle: this.$t("sample.title"),
+      cardSubTitle: this.$t("sample.detail"),
+      cardType: this.$t("sample.type"),
+      imageSrc: "/sunset-3988885_1280.jpg",
       scale: 3,
     };
   },
@@ -116,5 +129,16 @@ export default {
 <style>
 canvas {
   margin-right: 2px;
+}
+#card {
+  box-shadow: none;
+  -moz-transform: scale(1.75);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(1.75);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(1.75);
+  -webkit-transform-origin: 0 0;
+  transform: scale(1.75);
+  transform-origin: 0 0;
 }
 </style>

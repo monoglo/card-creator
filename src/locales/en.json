@@ -1,0 +1,21 @@
+{
+  "system": {
+    "title": "Card Creator"
+  },
+  "form": {
+    "exportScale": "Export Image Resolution",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "cardTitle": "Card Title",
+    "uploadImageFile": "Upload Image File",
+    "cardSubtitle": "Card Detail",
+    "cardType": "Card Footer",
+    "export": "Export"
+  },
+  "sample": {
+    "title": "Dragon Knight",
+    "detail": "Deal double damage when fighting against dragon units or cooperating with dragon units",
+    "type": "Class"
+  }
+}

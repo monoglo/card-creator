@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app color="primary" dark>
     <div class="d-flex align-center">
-      <div class="text-h5">Card Creator</div>
+      <div class="text-h5">{{ $t("system.title") }}</div>
     </div>
 
     <v-spacer></v-spacer>

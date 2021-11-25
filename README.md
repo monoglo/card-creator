@@ -4,8 +4,7 @@ Create your own DIY card with material design and export it!
 
 [Start](https://monoglo.github.io/)
 
-<img src="doc/images/dragonknight.png" width="300">
-<img src="doc/images/dk.png" width="300">
+<img src="doc/images/dragonknight.png" width="300"><img src="doc/images/dk.png" width="300">
 
 ## Project setup
 

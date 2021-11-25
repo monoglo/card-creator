@@ -8,12 +8,13 @@
     "medium": "Medium",
     "high": "High",
     "cardTitle": "Card Title",
-    "uploadImageFile": "Upload Image File(Drag image in left to justify)",
+    "uploadImageFile": "Upload Image File (Drag image in left to justify)",
     "cardSubtitle": "Card Detail",
     "cardType": "Card Footer",
     "cardColor": "Background Color",
     "cardFontColor": "Font Color",
     "syncFontColor": "Synchronize font color",
+    "cardFont": "Font (support local font, just enter font name)",
     "export": "Export"
   },
   "sample": {

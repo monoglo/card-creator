@@ -8,12 +8,13 @@
     "medium": "中",
     "high": "高",
     "cardTitle": "卡牌名",
-    "uploadImageFile": "上传更改自定义图像(在左侧拖拽调整)",
+    "uploadImageFile": "上传更改自定义图像 (左侧拖拽调整)",
     "cardSubtitle": "卡面描述",
     "cardType": "卡牌类型（页脚）",
     "cardColor": "背景色",
     "cardFontColor": "字体颜色",
     "syncFontColor": "统一字体颜色",
+    "cardFont": "字体（支持本地字体，只需手动输入本地已安装字体名）",
     "export": "生成"
   },
   "sample": {

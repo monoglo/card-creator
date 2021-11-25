@@ -3,45 +3,122 @@
     <v-row>
       <v-col cols="12" :xs="ratio == 1.25 ? 4 : 3" :lg="ratio == 1.25 ? 4 : 3">
         <!-- 卡牌预览 -->
-        <v-card
-          max-width="248"
-          height="352"
-          class="text-center"
-          :color="cardBackgroundColor"
-          :style="'font-family: ' + selectedFont"
-          id="card"
-        >
-          <v-card-title class="text-center" :style="'color: ' + cardTitleColor">
-            {{ cardTitle }}
-          </v-card-title>
-          <div style="height: 180px">
-            <vue-cropper
-              ref="cropper"
-              :img="imageUrl"
-              :outputSize="1"
-              outputType="png"
-            ></vue-cropper>
-            <!-- <img :src="resultImageUrl" style="width: 100; height: 100%" /> -->
-          </div>
-
-          <v-card-subtitle
-            :style="
-              'height: 72px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
-              cardSubTitleColor
-            "
-          >
-            {{ cardSubTitle }}
-          </v-card-subtitle>
-          <div style="width: 100%">
-            <v-divider></v-divider>
-            <v-btn
-              text
-              class="font-weight-black"
-              :style="'color: ' + cardFooterColor"
-            >
-              {{ cardType }}
+        <v-card flat tile>
+          <v-window v-model="onboarding" id="card">
+            <v-window-item>
+              <v-card
+                max-width="248"
+                height="352"
+                class="text-center"
+                :color="cardBackgroundColor"
+                :style="'font-family: ' + selectedFont"
+              >
+                <v-card-title
+                  :style="
+                    'color: ' +
+                    cardTitleColor +
+                    ';justify-content: ' +
+                    titleJustify
+                  "
+                >
+                  {{ cardTitle }}
+                </v-card-title>
+                <div style="height: 180px">
+                  <vue-cropper
+                    ref="cropper"
+                    :img="imageUrl"
+                    :outputSize="1"
+                    outputType="png"
+                  ></vue-cropper>
+                  <!-- <img :src="resultImageUrl" style="width: 100; height: 100%" /> -->
+                </div>
+                <v-card-subtitle
+                  :style="
+                    'height: 72px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
+                    cardSubTitleColor
+                  "
+                >
+                  {{ cardSubTitle }}
+                </v-card-subtitle>
+                <div style="width: 100%">
+                  <v-divider></v-divider>
+                  <v-btn
+                    text
+                    class="font-weight-black"
+                    :style="'color: ' + cardFooterColor"
+                  >
+                    {{ cardType }}
+                  </v-btn>
+                </div>
+              </v-card>
+            </v-window-item>
+            <!-- 模板2 -->
+            <v-window-item>
+              <v-card
+                max-width="248"
+                height="352"
+                class="text-center"
+                :color="cardBackgroundColor"
+                :style="'font-family: ' + selectedFont"
+              >
+                <v-card-title
+                  :style="
+                    'color: ' +
+                    cardTitleColor +
+                    ';justify-content: ' +
+                    titleJustify
+                  "
+                >
+                  {{ cardTitle }}
+                </v-card-title>
+                <div style="height: 180px">
+                  <vue-cropper
+                    ref="cropper"
+                    :img="imageUrl"
+                    :outputSize="1"
+                    outputType="png"
+                  ></vue-cropper>
+                </div>
+                <v-card-subtitle
+                  :style="
+                    'height: 72px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
+                    cardSubTitleColor
+                  "
+                >
+                  {{ cardSubTitle }}
+                </v-card-subtitle>
+                <div style="width: 100%">
+                  <v-divider></v-divider>
+                  <v-btn
+                    text
+                    class="font-weight-black"
+                    :style="'color: ' + cardFooterColor"
+                  >
+                    {{ cardType }}
+                  </v-btn>
+                </div>
+              </v-card>
+            </v-window-item>
+          </v-window>
+          <v-card-actions class="justify-space-between">
+            <v-btn text @click="prev">
+              <v-icon>mdi-chevron-left</v-icon>
             </v-btn>
-          </div>
+            <v-item-group v-model="onboarding" class="text-center" mandatory>
+              <v-item
+                v-for="n in length"
+                :key="`btn-${n}`"
+                v-slot="{ active, toggle }"
+              >
+                <v-btn :input-value="active" icon @click="toggle">
+                  <v-icon>mdi-record</v-icon>
+                </v-btn>
+              </v-item>
+            </v-item-group>
+            <v-btn text @click="next">
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
       <v-col cols="11" xs="3" lg="3" id="right"
@@ -55,6 +132,33 @@
             :tick-labels="[$t('form.low'), $t('form.medium'), $t('form.high')]"
           ></v-slider>
           <v-text-field v-model="cardTitle" :label="$t('form.cardTitle')">
+            <v-icon
+              slot="append"
+              :color="titleJustify == 'left' ? 'primary' : 'black'"
+              v-bind="attrs"
+              v-on="on"
+              @click="switchTitleJustifyToLeft"
+            >
+              mdi-format-align-left
+            </v-icon>
+            <v-icon
+              slot="append"
+              :color="titleJustify == 'center' ? 'primary' : 'black'"
+              v-bind="attrs"
+              v-on="on"
+              @click="switchTitleJustifyToCenter"
+            >
+              mdi-format-align-center
+            </v-icon>
+            <v-icon
+              slot="append"
+              :color="titleJustify == 'right' ? 'primary' : 'black'"
+              v-bind="attrs"
+              v-on="on"
+              @click="switchTitleJustifyToRight"
+            >
+              mdi-format-align-right
+            </v-icon>
             <v-menu
               offset-y
               slot="append"
@@ -240,6 +344,9 @@ export default {
       syncFontColor: false,
       fonts: [],
       selectedFont: "'Roboto', sans-serif",
+      onboarding: 0,
+      length: 2,
+      titleJustify: "left",
     };
   },
   mounted() {
@@ -247,6 +354,15 @@ export default {
     this.listFonts();
   },
   methods: {
+    switchTitleJustifyToCenter() {
+      this.titleJustify = "center";
+    },
+    switchTitleJustifyToLeft() {
+      this.titleJustify = "left";
+    },
+    switchTitleJustifyToRight() {
+      this.titleJustify = "right";
+    },
     exportCanvas() {
       html2canvas(document.getElementById("card"), {
         scale: this.scale,
@@ -276,6 +392,14 @@ export default {
         this.cardSubTitleColor = this.cardSubTitleColorBackup;
         this.cardFooterColor = this.cardFooterColorBackup;
       }
+    },
+    next() {
+      this.onboarding =
+        this.onboarding + 1 === this.length ? 0 : this.onboarding + 1;
+    },
+    prev() {
+      this.onboarding =
+        this.onboarding - 1 < 0 ? this.length - 1 : this.onboarding - 1;
     },
     listFonts() {
       const fontCheck = new Set(

@@ -61,17 +61,7 @@
                 :color="cardBackgroundColor"
                 :style="'font-family: ' + selectedFont"
               >
-                <v-card-title
-                  :style="
-                    'color: ' +
-                    cardTitleColor +
-                    ';justify-content: ' +
-                    titleJustify
-                  "
-                >
-                  {{ cardTitle }}
-                </v-card-title>
-                <div style="height: 180px">
+                <div style="height: 180px; overflow: hidden">
                   <vue-cropper
                     ref="cropper"
                     :img="imageUrl"
@@ -79,9 +69,21 @@
                     outputType="png"
                   ></vue-cropper>
                 </div>
+                <v-card-title
+                  :style="
+                    'color: ' +
+                    cardTitleColor +
+                    ';justify-content: ' +
+                    titleJustify +
+                    ';padding: 4px 16px'
+                  "
+                >
+                  {{ cardTitle }}
+                </v-card-title>
+                <v-divider></v-divider>
                 <v-card-subtitle
                   :style="
-                    'height: 72px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
+                    'height: 94px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
                     cardSubTitleColor
                   "
                 >
@@ -135,8 +137,6 @@
             <v-icon
               slot="append"
               :color="titleJustify == 'left' ? 'primary' : 'black'"
-              v-bind="attrs"
-              v-on="on"
               @click="switchTitleJustifyToLeft"
             >
               mdi-format-align-left
@@ -144,8 +144,6 @@
             <v-icon
               slot="append"
               :color="titleJustify == 'center' ? 'primary' : 'black'"
-              v-bind="attrs"
-              v-on="on"
               @click="switchTitleJustifyToCenter"
             >
               mdi-format-align-center
@@ -153,8 +151,6 @@
             <v-icon
               slot="append"
               :color="titleJustify == 'right' ? 'primary' : 'black'"
-              v-bind="attrs"
-              v-on="on"
               @click="switchTitleJustifyToRight"
             >
               mdi-format-align-right
@@ -326,6 +322,13 @@ import { VueCropper } from "vue-cropper";
 export default {
   components: {
     "vue-cropper": VueCropper,
+  },
+  watch: {
+    onboarding(onboarding) {
+      if (onboarding == 1) {
+        this.titleJustify = "center";
+      }
+    },
   },
   data() {
     return {
@@ -526,6 +529,19 @@ export default {
           "Trebuchet MS",
           "Verdana",
           "Zapfino",
+          "宋体",
+          "黑体",
+          "微软雅黑",
+          "微软雅黑",
+          "微软正黑体",
+          "新宋体",
+          "新细明体",
+          "细明体",
+          "标楷体",
+          "仿宋",
+          "楷体",
+          "仿宋_GB2312",
+          "楷体_GB2312",
         ].sort()
       );
 
@@ -540,7 +556,6 @@ export default {
           }
         }
         this.fonts = [...fontAvailable.values()];
-        console.log("Available Fonts:", [...fontAvailable.values()]);
       })();
     },
   },

@@ -689,7 +689,7 @@ canvas {
     z-index: 1;
     top: 0;
     left: 0;
-    width: 609px;
+    width: 608px;
     height: 864px;
     overflow: hidden;
     background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);

@@ -286,11 +286,15 @@
           <v-row>
             <v-col cols="8"> </v-col>
             <v-col cols="4">
+              <v-switch
+                v-model="show3D"
+                :label="$t('form.show3D')"
+                style="margin-top: 100px"
+              ></v-switch>
               <v-btn
                 class="font-weight-black"
                 @click="exportCanvas"
                 color="primary"
-                style="margin-top: 100px"
                 large
               >
                 {{ $t("form.export") }}
@@ -303,9 +307,20 @@
         cols="12"
         :xs="ratio == 1.25 ? 5 : 6"
         :lg="ratio == 1.25 ? 5 : 6"
-        id="result"
-        style="zoom: 175%; display: flex; overflow-x: auto; white-space: nowrap"
+        style="display: flex; overflow-x: auto; white-space: nowrap"
       >
+        <div class="l-container" v-show="show3D">
+          <div
+            class="b-game-card"
+            v-for="item in exportCanvasList"
+            v-bind:key="item"
+          >
+            <div class="cover" :style="'background-image: url(' + item + ');'">
+              <div class="gloss"></div>
+            </div>
+          </div>
+        </div>
+        <div id="result" v-show="!show3D" style="zoom: 175%"></div>
       </v-col>
     </v-row>
     <v-divider></v-divider>
@@ -318,6 +333,7 @@
 <script>
 import html2canvas from "html2canvas";
 import { VueCropper } from "vue-cropper";
+import $ from "jquery";
 
 export default {
   components: {
@@ -350,6 +366,8 @@ export default {
       onboarding: 0,
       length: 2,
       titleJustify: "left",
+      exportCanvasList: [],
+      show3D: false,
     };
   },
   mounted() {
@@ -371,8 +389,60 @@ export default {
         scale: this.scale,
         allowTaint: true,
         useCORS: true,
-      }).then(function (canvas) {
+      }).then((canvas) => {
         document.getElementById("result").prepend(canvas);
+        this.exportCanvasList.unshift(canvas.toDataURL());
+        setTimeout(() => {
+          const maxTilt = 30;
+          $(".b-game-card").unbind();
+          $(".b-game-card")
+            .mousemove(function (evt) {
+              let bounding = mouseOverBoundingElem(evt);
+
+              let posX = bounding.width / 2 - bounding.x;
+              let posY = bounding.height / 2 - bounding.y;
+              let hypotenuseCursor = Math.sqrt(
+                Math.pow(posX, 2) + Math.pow(posY, 2)
+              );
+              let hypotenuseMax = Math.sqrt(
+                Math.pow(bounding.width / 2, 2) +
+                  Math.pow(bounding.height / 2, 2)
+              );
+              let ratio = hypotenuseCursor / hypotenuseMax;
+
+              $(".cover", this).css({
+                transform: `rotate3d(${posY / hypotenuseCursor}, ${
+                  -posX / hypotenuseCursor
+                }, 0, ${ratio * maxTilt}deg)`,
+                filter: `brightness(${1.6 - bounding.y / bounding.height})`, // 0.6 = offset, brightness will be from 0.6 to 1.6
+              });
+              $(".gloss", this).css({
+                transform: `translateX(${posX * ratio * 0.75}px) translateY(${
+                  posY * ratio
+                }px)`, // 0.75 = offset
+              });
+            })
+            .mouseleave(function () {
+              let css = {
+                transform: "",
+                filter: "",
+              };
+              $(".cover, .gloss", this).css(css);
+            });
+
+          function mouseOverBoundingElem(evt) {
+            let bounding = evt.target.getBoundingClientRect();
+            let x = evt.originalEvent.pageX - Math.round(bounding.left);
+            let y = evt.originalEvent.pageY - Math.round(bounding.top);
+
+            return {
+              x: Math.max(0, x),
+              y: Math.max(0, y),
+              width: Math.round(bounding.width),
+              height: Math.round(bounding.height),
+            };
+          }
+        }, 300);
       });
     },
     uploadImage(files) {
@@ -562,7 +632,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 canvas {
   margin-right: 2px;
 }
@@ -588,5 +658,82 @@ canvas {
 }
 #result {
   padding: 0 0 0 12px;
+}
+
+.l-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 120px;
+
+  @media screen and (max-width: 760px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.b-game-card {
+  position: relative;
+  z-index: 1;
+  height: 80%;
+  width: 300px;
+  padding-bottom: 150%;
+  perspective: 1000px;
+  transition: transform 0.35s;
+
+  .cover {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 95%;
+    overflow: hidden;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    background-size: cover;
+    box-shadow: 0px 0px 8px 1px #000000ad;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    will-change: transform;
+    transition: transform 0.5s, filter 0.35s;
+
+    /* Gloss */
+    .gloss {
+      position: absolute;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      width: 20em;
+      height: 20em;
+      margin-left: -6em;
+      margin-top: -17em;
+      background: radial-gradient(
+        circle farthest-corner at 50% 50%,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(255, 255, 255, 0.5) 33%,
+        rgba(255, 255, 255, 0) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      opacity: 0;
+      will-change: transform;
+      transition: opacity 0.21s ease-in-out;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.5);
+    z-index: 10;
+
+    .cover {
+      box-shadow: 10px 20px 32px 1px #000000ab;
+      transition: none;
+
+      .gloss {
+        opacity: 0.5;
+      }
+    }
+  }
 }
 </style>

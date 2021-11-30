@@ -15,6 +15,7 @@
     "cardFontColor": "Font Color",
     "syncFontColor": "Synchronize font color",
     "cardFont": "Font (support local font, just enter font name)",
+    "show3D": "3D Preview",
     "export": "Export"
   },
   "sample": {

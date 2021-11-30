@@ -15,6 +15,7 @@
     "cardFontColor": "字体颜色",
     "syncFontColor": "统一字体颜色",
     "cardFont": "字体（支持本地字体，只需手动输入本地已安装字体名）",
+    "show3D": "3D预览卡牌",
     "export": "生成"
   },
   "sample": {

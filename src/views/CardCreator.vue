@@ -666,7 +666,6 @@ canvas {
   grid-gap: 30px;
   width: 100%;
   max-width: 1200px;
-  padding: 120px;
 
   @media screen and (max-width: 760px) {
     grid-template-columns: repeat(2, 1fr);
@@ -681,15 +680,17 @@ canvas {
   padding-bottom: 150%;
   perspective: 1000px;
   transition: transform 0.35s;
+  transform: scale(0.5);
+  margin: -80px 0 0 0;
 
   .cover {
-    border-radius: 6px;
+    border-radius: 11px;
     position: absolute;
     z-index: 1;
     top: 0;
     left: 0;
-    width: 300px;
-    height: 95%;
+    width: 600px;
+    height: 864px;
     overflow: hidden;
     background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     background-size: cover;
@@ -724,7 +725,7 @@ canvas {
   }
 
   &:hover {
-    transform: scale(1.5);
+    transform: scale(0.7);
     z-index: 10;
 
     .cover {

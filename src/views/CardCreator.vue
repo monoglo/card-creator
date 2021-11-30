@@ -683,6 +683,7 @@ canvas {
   transition: transform 0.35s;
 
   .cover {
+    border-radius: 6px;
     position: absolute;
     z-index: 1;
     top: 0;

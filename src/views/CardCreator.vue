@@ -307,7 +307,12 @@
         cols="12"
         :xs="ratio == 1.25 ? 5 : 6"
         :lg="ratio == 1.25 ? 5 : 6"
-        style="display: flex; overflow-x: auto; white-space: nowrap"
+        style="
+          display: flex;
+          overflow-x: auto;
+          white-space: nowrap;
+          height: 800px;
+        "
       >
         <div class="l-container" v-show="show3D">
           <div
@@ -680,7 +685,7 @@ canvas {
   padding-bottom: 150%;
   perspective: 1000px;
   transition: transform 0.35s;
-  transform: scale(0.5);
+  transform: scale(0.4);
   margin: -80px 0 0 0;
 
   .cover {
@@ -689,11 +694,10 @@ canvas {
     z-index: 1;
     top: 0;
     left: 0;
-    width: 608px;
-    height: 864px;
+    width: 744px;
+    height: 1056px;
     overflow: hidden;
     background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-    background-size: cover;
     box-shadow: 0px 0px 8px 1px #000000ad;
     perspective-origin: 50% 50%;
     transform-style: preserve-3d;
@@ -725,7 +729,7 @@ canvas {
   }
 
   &:hover {
-    transform: scale(0.7);
+    transform: scale(0.55);
     z-index: 10;
 
     .cover {

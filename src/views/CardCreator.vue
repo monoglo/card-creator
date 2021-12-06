@@ -12,7 +12,7 @@
                   height="352"
                   class="text-center"
                   :color="cardBackgroundColor"
-                  :style="'font-family: ' + selectedFont"
+                  :style="fontStyle"
                 >
                   <v-card-title
                     :style="
@@ -60,7 +60,7 @@
                   height="352"
                   class="text-center"
                   :color="cardBackgroundColor"
-                  :style="'font-family: ' + selectedFont"
+                  :style="fontStyle"
                 >
                   <div style="height: 180px; overflow: hidden">
                     <vue-cropper
@@ -291,13 +291,30 @@
                   </v-list-item>
                 </template>
               </v-combobox>
+              <v-combobox
+                v-if="locale == 'zh' || locale == 'zh-CN'"
+                v-model="selectedChineseFont"
+                :items="chineseFonts"
+                dense
+                label="中文字体（支持输入本地字体，如“思源黑体”）"
+              >
+                <template v-slot:item="{ item, attrs, on }">
+                  <v-list-item v-on="on" v-bind="attrs">
+                    <v-list-item-content>
+                      <v-list-item-title :style="'font-family: ' + item">
+                        {{ item }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
+              </v-combobox>
               <v-row>
                 <v-col cols="8"> </v-col>
                 <v-col cols="4">
                   <v-switch
                     v-model="show3D"
                     :label="$t('form.show3D')"
-                    style="margin-top: 100px"
+                    style="margin-top: 60px"
                   ></v-switch>
                   <v-btn
                     class="font-weight-black"
@@ -360,6 +377,20 @@ export default {
         this.titleJustify = "center";
       }
     },
+    "$i18n.locale"(locale) {
+      this.locale = locale;
+    },
+    selectedFont(font) {
+      if (this.locale != "zh") {
+        this.fontStyle = "font-family: " + font;
+      } else {
+        this.fontStyle =
+          "font-family: " + font + ", " + this.selectedChineseFont;
+      }
+    },
+    selectedChineseFont(font) {
+      this.fontStyle = "font-family: " + this.selectedFont + ", " + font;
+    },
   },
   data() {
     return {
@@ -377,12 +408,16 @@ export default {
       ratio: 1,
       syncFontColor: false,
       fonts: [],
-      selectedFont: "'Roboto', sans-serif",
+      chineseFonts: [],
+      selectedFont: "'Roboto'",
+      selectedChineseFont: "黑体",
+      fontStyle: "font-family: 'Roboto';",
       onboarding: 0,
       length: 2,
       titleJustify: "left",
       exportCanvasList: [],
       show3D: false,
+      locale: navigator.languages[0],
     };
   },
   mounted() {
@@ -614,6 +649,11 @@ export default {
           "Trebuchet MS",
           "Verdana",
           "Zapfino",
+        ].sort()
+      );
+
+      const chineseFontCheck = new Set(
+        [
           "宋体",
           "黑体",
           "微软雅黑",
@@ -629,11 +669,11 @@ export default {
           "楷体_GB2312",
         ].sort()
       );
-
       (async () => {
         await document.fonts.ready;
 
         const fontAvailable = new Set();
+        const chineseFontAvailable = new Set();
 
         for (const font of fontCheck.values()) {
           if (document.fonts.check(`12px "${font}"`)) {
@@ -641,6 +681,12 @@ export default {
           }
         }
         this.fonts = [...fontAvailable.values()];
+        for (const font of chineseFontCheck.values()) {
+          if (document.fonts.check(`12px "${font}"`)) {
+            chineseFontAvailable.add(font);
+          }
+        }
+        this.chineseFonts = [...chineseFontAvailable.values()];
       })();
     },
   },

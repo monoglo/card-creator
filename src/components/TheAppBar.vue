@@ -20,7 +20,7 @@
 export default {
   methods: {
     changeLang() {
-      if (this.$i18n.locale === "zh") {
+      if (this.$i18n.locale == "zh-CN" || this.$i18n.locale == "zh") {
         this.$i18n.locale = "en";
       } else {
         this.$i18n.locale = "zh";

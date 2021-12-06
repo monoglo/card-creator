@@ -1,5 +1,5 @@
 <template>
-  <div class="ma-4">
+  <div class="my-4">
     <v-row dense>
       <v-col cols="12" :xs="ratio == 1.25 ? 4 : 3" :lg="ratio == 1.25 ? 4 : 3">
         <!-- 卡牌预览 -->

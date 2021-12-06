@@ -1,107 +1,109 @@
 <template>
   <div class="ma-4">
-    <v-row>
+    <v-row dense>
       <v-col cols="12" :xs="ratio == 1.25 ? 4 : 3" :lg="ratio == 1.25 ? 4 : 3">
         <!-- 卡牌预览 -->
         <v-card flat tile>
-          <v-window v-model="onboarding" id="card">
-            <v-window-item>
-              <v-card
-                max-width="248"
-                height="352"
-                class="text-center"
-                :color="cardBackgroundColor"
-                :style="'font-family: ' + selectedFont"
-              >
-                <v-card-title
-                  :style="
-                    'color: ' +
-                    cardTitleColor +
-                    ';justify-content: ' +
-                    titleJustify
-                  "
+          <div style="display: flex; justify-content: space-around">
+            <v-window v-model="onboarding" id="card">
+              <v-window-item>
+                <v-card
+                  max-width="248"
+                  height="352"
+                  class="text-center"
+                  :color="cardBackgroundColor"
+                  :style="'font-family: ' + selectedFont"
                 >
-                  {{ cardTitle }}
-                </v-card-title>
-                <div style="height: 180px">
-                  <vue-cropper
-                    ref="cropper"
-                    :img="imageUrl"
-                    :outputSize="1"
-                    outputType="png"
-                  ></vue-cropper>
-                  <!-- <img :src="resultImageUrl" style="width: 100; height: 100%" /> -->
-                </div>
-                <v-card-subtitle
-                  :style="
-                    'height: 72px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
-                    cardSubTitleColor
-                  "
-                >
-                  {{ cardSubTitle }}
-                </v-card-subtitle>
-                <div style="width: 100%">
-                  <v-divider></v-divider>
-                  <v-btn
-                    text
-                    class="font-weight-black"
-                    :style="'color: ' + cardFooterColor"
+                  <v-card-title
+                    :style="
+                      'color: ' +
+                      cardTitleColor +
+                      ';justify-content: ' +
+                      titleJustify
+                    "
                   >
-                    {{ cardType }}
-                  </v-btn>
-                </div>
-              </v-card>
-            </v-window-item>
-            <!-- 模板2 -->
-            <v-window-item>
-              <v-card
-                max-width="248"
-                height="352"
-                class="text-center"
-                :color="cardBackgroundColor"
-                :style="'font-family: ' + selectedFont"
-              >
-                <div style="height: 180px; overflow: hidden">
-                  <vue-cropper
-                    ref="cropper"
-                    :img="imageUrl"
-                    :outputSize="1"
-                    outputType="png"
-                  ></vue-cropper>
-                </div>
-                <v-card-title
-                  :style="
-                    'color: ' +
-                    cardTitleColor +
-                    ';justify-content: ' +
-                    titleJustify +
-                    ';padding: 4px 16px'
-                  "
-                >
-                  {{ cardTitle }}
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-card-subtitle
-                  :style="
-                    'height: 94px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
-                    cardSubTitleColor
-                  "
-                >
-                  {{ cardSubTitle }}
-                </v-card-subtitle>
-                <div style="width: 100%">
-                  <v-divider></v-divider>
-                  <v-btn
-                    text
-                    class="font-weight-black"
-                    :style="'color: ' + cardFooterColor"
+                    {{ cardTitle }}
+                  </v-card-title>
+                  <div style="height: 180px">
+                    <vue-cropper
+                      ref="cropper"
+                      :img="imageUrl"
+                      :outputSize="1"
+                      outputType="png"
+                    ></vue-cropper>
+                    <!-- <img :src="resultImageUrl" style="width: 100; height: 100%" /> -->
+                  </div>
+                  <v-card-subtitle
+                    :style="
+                      'height: 72px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
+                      cardSubTitleColor
+                    "
                   >
-                    {{ cardType }}
-                  </v-btn>
-                </div>
-              </v-card>
-            </v-window-item>
-          </v-window>
+                    {{ cardSubTitle }}
+                  </v-card-subtitle>
+                  <div style="width: 100%">
+                    <v-divider></v-divider>
+                    <v-btn
+                      text
+                      class="font-weight-black"
+                      :style="'color: ' + cardFooterColor"
+                    >
+                      {{ cardType }}
+                    </v-btn>
+                  </div>
+                </v-card>
+              </v-window-item>
+              <!-- 模板2 -->
+              <v-window-item>
+                <v-card
+                  max-width="248"
+                  height="352"
+                  class="text-center"
+                  :color="cardBackgroundColor"
+                  :style="'font-family: ' + selectedFont"
+                >
+                  <div style="height: 180px; overflow: hidden">
+                    <vue-cropper
+                      ref="cropper"
+                      :img="imageUrl"
+                      :outputSize="1"
+                      outputType="png"
+                    ></vue-cropper>
+                  </div>
+                  <v-card-title
+                    :style="
+                      'color: ' +
+                      cardTitleColor +
+                      ';justify-content: ' +
+                      titleJustify +
+                      ';padding: 4px 16px'
+                    "
+                  >
+                    {{ cardTitle }}
+                  </v-card-title>
+                  <v-divider></v-divider>
+                  <v-card-subtitle
+                    :style="
+                      'height: 94px;padding: 0;display: flex;justify-content: center;align-items: center;color:' +
+                      cardSubTitleColor
+                    "
+                  >
+                    {{ cardSubTitle }}
+                  </v-card-subtitle>
+                  <div style="width: 100%">
+                    <v-divider></v-divider>
+                    <v-btn
+                      text
+                      class="font-weight-black"
+                      :style="'color: ' + cardFooterColor"
+                    >
+                      {{ cardType }}
+                    </v-btn>
+                  </div>
+                </v-card>
+              </v-window-item>
+            </v-window>
+          </div>
           <v-card-actions class="justify-space-between">
             <v-btn text @click="prev">
               <v-icon>mdi-chevron-left</v-icon>
@@ -123,10 +125,12 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col cols="11" xs="3" lg="3" id="right"
-        ><v-form>
-          <!-- TODO 导出分辨率 -->
-          <!-- <v-slider
+      <v-col cols="11" xs="3" lg="3" id="right">
+        <v-card color="">
+          <v-card-text>
+            <v-form>
+              <!-- TODO 导出分辨率 -->
+              <!-- <v-slider
             hint="Im a hint"
             max="3"
             min="1"
@@ -134,175 +138,180 @@
             :label="$t('form.exportScale')"
             :tick-labels="[$t('form.low'), $t('form.medium'), $t('form.high')]"
           ></v-slider> -->
-          <v-text-field v-model="cardTitle" :label="$t('form.cardTitle')">
-            <v-icon
-              slot="append"
-              :color="titleJustify == 'left' ? 'primary' : 'black'"
-              @click="switchTitleJustifyToLeft"
-            >
-              mdi-format-align-left
-            </v-icon>
-            <v-icon
-              slot="append"
-              :color="titleJustify == 'center' ? 'primary' : 'black'"
-              @click="switchTitleJustifyToCenter"
-            >
-              mdi-format-align-center
-            </v-icon>
-            <v-icon
-              slot="append"
-              :color="titleJustify == 'right' ? 'primary' : 'black'"
-              @click="switchTitleJustifyToRight"
-            >
-              mdi-format-align-right
-            </v-icon>
-            <v-menu
-              offset-y
-              slot="append"
-              :close-on-content-click="false"
-              offset-x
-            >
-              <template v-slot:activator="{ on, attrs }">
+              <v-text-field v-model="cardTitle" :label="$t('form.cardTitle')">
                 <v-icon
                   slot="append"
-                  :color="cardTitleColor"
-                  v-bind="attrs"
-                  v-on="on"
+                  :color="titleJustify == 'left' ? 'primary' : 'black'"
+                  @click="switchTitleJustifyToLeft"
                 >
-                  mdi-format-color-text
+                  mdi-format-align-left
                 </v-icon>
-              </template>
-              <v-color-picker
-                v-model="cardTitleColor"
-                dot-size="25"
-                swatches-max-height="200"
-                show-swatches
-                @input="onColorChange"
-              ></v-color-picker>
-            </v-menu>
-          </v-text-field>
-          <v-file-input
-            truncate-length="15"
-            accept="image/*"
-            :label="$t('form.uploadImageFile')"
-            @change="uploadImage"
-          >
-            <v-menu
-              offset-y
-              slot="append"
-              :close-on-content-click="false"
-              offset-x
-            >
-              <template v-slot:activator="{ on, attrs }">
                 <v-icon
                   slot="append"
-                  :color="cardBackgroundColor"
-                  v-bind="attrs"
-                  v-on="on"
+                  :color="titleJustify == 'center' ? 'primary' : 'black'"
+                  @click="switchTitleJustifyToCenter"
                 >
-                  mdi-format-color-fill
+                  mdi-format-align-center
                 </v-icon>
-              </template>
-              <v-color-picker
-                v-model="cardBackgroundColor"
-                dot-size="25"
-                swatches-max-height="200"
-                show-swatches
-              ></v-color-picker>
-            </v-menu>
-          </v-file-input>
-          <v-text-field v-model="cardSubTitle" :label="$t('form.cardSubtitle')">
-            <v-menu
-              offset-y
-              slot="append"
-              :close-on-content-click="false"
-              offset-x
-            >
-              <template v-slot:activator="{ on, attrs }">
                 <v-icon
                   slot="append"
-                  :color="cardSubTitleColor"
-                  v-bind="attrs"
-                  v-on="on"
+                  :color="titleJustify == 'right' ? 'primary' : 'black'"
+                  @click="switchTitleJustifyToRight"
                 >
-                  mdi-format-color-text
+                  mdi-format-align-right
                 </v-icon>
-              </template>
-              <v-color-picker
-                v-model="cardSubTitleColor"
-                dot-size="25"
-                swatches-max-height="200"
-                show-swatches
-                @input="onColorChange"
-              ></v-color-picker>
-            </v-menu>
-          </v-text-field>
-          <v-text-field v-model="cardType" :label="$t('form.cardType')">
-            <v-menu
-              offset-y
-              slot="append"
-              :close-on-content-click="false"
-              offset-x
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon
+                <v-menu
+                  offset-y
                   slot="append"
-                  :color="cardFooterColor"
-                  v-bind="attrs"
-                  v-on="on"
+                  :close-on-content-click="false"
+                  offset-x
                 >
-                  mdi-format-color-text
-                </v-icon>
-              </template>
-              <v-color-picker
-                v-model="cardFooterColor"
-                dot-size="25"
-                swatches-max-height="200"
-                show-swatches
-                @input="onColorChange"
-              ></v-color-picker>
-            </v-menu>
-          </v-text-field>
-          <v-switch
-            v-model="syncFontColor"
-            :label="$t('form.syncFontColor')"
-            @change="onSyncChange"
-          ></v-switch>
-          <v-combobox
-            v-model="selectedFont"
-            :items="fonts"
-            dense
-            :label="$t('form.cardFont')"
-          >
-            <template v-slot:item="{ item, attrs, on }">
-              <v-list-item v-on="on" v-bind="attrs">
-                <v-list-item-content>
-                  <v-list-item-title :style="'font-family: ' + item">
-                    {{ item }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </template>
-          </v-combobox>
-          <v-row>
-            <v-col cols="8"> </v-col>
-            <v-col cols="4">
-              <v-switch
-                v-model="show3D"
-                :label="$t('form.show3D')"
-                style="margin-top: 100px"
-              ></v-switch>
-              <v-btn
-                class="font-weight-black"
-                @click="exportCanvas"
-                color="primary"
-                large
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      slot="append"
+                      :color="cardTitleColor"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      mdi-format-color-text
+                    </v-icon>
+                  </template>
+                  <v-color-picker
+                    v-model="cardTitleColor"
+                    dot-size="25"
+                    swatches-max-height="200"
+                    show-swatches
+                    @input="onColorChange"
+                  ></v-color-picker>
+                </v-menu>
+              </v-text-field>
+              <v-file-input
+                truncate-length="15"
+                accept="image/*"
+                :label="$t('form.uploadImageFile')"
+                @change="uploadImage"
               >
-                {{ $t("form.export") }}
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-form>
+                <v-menu
+                  offset-y
+                  slot="append"
+                  :close-on-content-click="false"
+                  offset-x
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      slot="append"
+                      :color="cardBackgroundColor"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      mdi-format-color-fill
+                    </v-icon>
+                  </template>
+                  <v-color-picker
+                    v-model="cardBackgroundColor"
+                    dot-size="25"
+                    swatches-max-height="200"
+                    show-swatches
+                  ></v-color-picker>
+                </v-menu>
+              </v-file-input>
+              <v-text-field
+                v-model="cardSubTitle"
+                :label="$t('form.cardSubtitle')"
+              >
+                <v-menu
+                  offset-y
+                  slot="append"
+                  :close-on-content-click="false"
+                  offset-x
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      slot="append"
+                      :color="cardSubTitleColor"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      mdi-format-color-text
+                    </v-icon>
+                  </template>
+                  <v-color-picker
+                    v-model="cardSubTitleColor"
+                    dot-size="25"
+                    swatches-max-height="200"
+                    show-swatches
+                    @input="onColorChange"
+                  ></v-color-picker>
+                </v-menu>
+              </v-text-field>
+              <v-text-field v-model="cardType" :label="$t('form.cardType')">
+                <v-menu
+                  offset-y
+                  slot="append"
+                  :close-on-content-click="false"
+                  offset-x
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      slot="append"
+                      :color="cardFooterColor"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      mdi-format-color-text
+                    </v-icon>
+                  </template>
+                  <v-color-picker
+                    v-model="cardFooterColor"
+                    dot-size="25"
+                    swatches-max-height="200"
+                    show-swatches
+                    @input="onColorChange"
+                  ></v-color-picker>
+                </v-menu>
+              </v-text-field>
+              <v-switch
+                v-model="syncFontColor"
+                :label="$t('form.syncFontColor')"
+                @change="onSyncChange"
+              ></v-switch>
+              <v-combobox
+                v-model="selectedFont"
+                :items="fonts"
+                dense
+                :label="$t('form.cardFont')"
+              >
+                <template v-slot:item="{ item, attrs, on }">
+                  <v-list-item v-on="on" v-bind="attrs">
+                    <v-list-item-content>
+                      <v-list-item-title :style="'font-family: ' + item">
+                        {{ item }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
+              </v-combobox>
+              <v-row>
+                <v-col cols="8"> </v-col>
+                <v-col cols="4">
+                  <v-switch
+                    v-model="show3D"
+                    :label="$t('form.show3D')"
+                    style="margin-top: 100px"
+                  ></v-switch>
+                  <v-btn
+                    class="font-weight-black"
+                    @click="exportCanvas"
+                    color="primary"
+                    large
+                  >
+                    {{ $t("form.export") }}
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col
         cols="12"
@@ -312,7 +321,7 @@
           display: flex;
           overflow-x: auto;
           white-space: nowrap;
-          height: 800px;
+          height: 657px;
         "
       >
         <div class="l-container" v-show="show3D">
@@ -661,6 +670,8 @@ canvas {
 }
 #card {
   box-shadow: none;
+  // display: flex;
+  // justify-content: space-around;
 }
 #result {
   padding: 0 0 0 12px;

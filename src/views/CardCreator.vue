@@ -8,7 +8,7 @@
             <v-window v-model="onboarding" id="card">
               <v-window-item>
                 <v-card
-                  max-width="248"
+                  width="248"
                   height="352"
                   class="text-center"
                   :color="cardBackgroundColor"
@@ -56,7 +56,7 @@
               <!-- 模板2 -->
               <v-window-item>
                 <v-card
-                  max-width="248"
+                  width="248"
                   height="352"
                   class="text-center"
                   :color="cardBackgroundColor"

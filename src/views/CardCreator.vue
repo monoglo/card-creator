@@ -125,14 +125,15 @@
       </v-col>
       <v-col cols="11" xs="3" lg="3" id="right"
         ><v-form>
-          <v-slider
+          <!-- TODO 导出分辨率 -->
+          <!-- <v-slider
             hint="Im a hint"
             max="3"
             min="1"
             v-model="scale"
             :label="$t('form.exportScale')"
             :tick-labels="[$t('form.low'), $t('form.medium'), $t('form.high')]"
-          ></v-slider>
+          ></v-slider> -->
           <v-text-field v-model="cardTitle" :label="$t('form.cardTitle')">
             <v-icon
               slot="append"

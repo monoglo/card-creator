@@ -381,7 +381,7 @@ export default {
       this.locale = locale;
     },
     selectedFont(font) {
-      if (this.locale != "zh") {
+      if (this.locale != "zh" && this.locale != "zh-CN") {
         this.fontStyle = "font-family: " + font;
       } else {
         this.fontStyle =
